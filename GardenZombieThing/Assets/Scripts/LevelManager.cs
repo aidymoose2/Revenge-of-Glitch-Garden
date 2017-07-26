@@ -9,9 +9,12 @@ public class LevelManager : MonoBehaviour {
 
 	void Start ()
 	{
-		Invoke ("LoadNextLevel", autoLoadNextLevelAfter);
+		//checks whether currently loaded screen is splash screen. If it is, autoloads next level
+		if (SceneManager.GetActiveScene().buildIndex == 0)
+			{
+				Invoke ("LoadNextLevel", autoLoadNextLevelAfter);
+			}
 	}
-
 
 
 	public void LoadLevel(string name)

@@ -20,9 +20,9 @@ public class MusicManager : MonoBehaviour {
 		}
 
 	void Awake()//Music Manager Script
-		{
-		DontDestroyOnLoad(gameObject);
-		MusicManager.OnSceneChange += MusicChange;
+		{ 
+			DontDestroyOnLoad(gameObject);
+			MusicManager.OnSceneChange += MusicChange;
 		}
 
 	void MusicChange (int level)//OnLevelWasLoaded 
