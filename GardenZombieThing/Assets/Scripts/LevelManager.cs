@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour {
 
 	public float autoLoadNextLevelAfter;
+	public delegate void SceneChange(int level);
+	public static event SceneChange OnSceneChange;
 
 	void Start ()
 	{
@@ -13,6 +15,11 @@ public class LevelManager : MonoBehaviour {
 		if (SceneManager.GetActiveScene().buildIndex == 0)
 			{
 				Invoke ("LoadNextLevel", autoLoadNextLevelAfter);
+			}
+		if (OnSceneChange !=null)
+			{
+				OnSceneChange (SceneManager.GetActiveScene().buildIndex);
+				Debug.Log("Active Scene number: " + OnSceneChange);
 			}
 	}
 

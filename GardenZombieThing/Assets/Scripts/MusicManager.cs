@@ -5,24 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class MusicManager : MonoBehaviour {
 
-	public delegate void SceneChange(int level);
-	public static event SceneChange OnSceneChange;
+	
 	public AudioClip[] levelMusicChangeArray;
 	private AudioSource audioSource;
 
 	void Start()//Level Manager Script
 		{
-		audioSource = GetComponent<AudioSource>();
-		if (OnSceneChange !=null)
-			{
-			OnSceneChange(SceneManager.GetActiveScene().buildIndex);
-			}
+			audioSource = GetComponent<AudioSource>();
+			Debug.Log("Audio Source Detected");
 		}
 
 	void Awake()//Music Manager Script
 		{ 
 			DontDestroyOnLoad(gameObject);
-			MusicManager.OnSceneChange += MusicChange;
+			LevelManager.OnSceneChange += MusicChange;
+			Debug.Log("Music Change initiated");
 		}
 
 	void MusicChange (int level)//OnLevelWasLoaded 
@@ -36,4 +33,8 @@ public class MusicManager : MonoBehaviour {
 					Debug.Log("Playing audio for level " + level + " in build");
 				}
 		}
+	void OnDestroy()
+	{
+		LevelManager.OnSceneChange -=MusicChange;
+	}
 }
