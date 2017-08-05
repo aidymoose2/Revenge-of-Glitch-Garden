@@ -37,4 +37,10 @@ public class MusicManager : MonoBehaviour {
 	{
 		LevelManager.OnSceneChange -=MusicChange;
 	}
+
+	public void ChangeVolume (float selectedVolume)
+	{
+		audioSource.volume = selectedVolume;
+		Debug.Log ("Volume set to: " + selectedVolume);
+	}
 }
