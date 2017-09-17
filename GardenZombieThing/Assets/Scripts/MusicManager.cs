@@ -41,6 +41,7 @@ public class MusicManager : MonoBehaviour {
 	public void ChangeVolume (float selectedVolume)
 	{
 		audioSource.volume = selectedVolume;
+		PlayerPrefsManager.SetMasterVolume(selectedVolume);
 		Debug.Log ("Volume set to: " + selectedVolume);
 	}
 }
