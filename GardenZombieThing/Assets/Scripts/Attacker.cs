@@ -18,10 +18,15 @@ public class Attacker : MonoBehaviour {
 
 	void OnTriggerEnter2D()
 	{
-		print ("Collided with" + name); 
+		print ("Collided with " + name); 
 	}
 	public void SetSpeed(float speed)
 	{
 		currentSpeed = speed;
+	}
+
+	public void StrikeCurrentTarget(float damage)
+	{
+		print(this + " caused " + damage + " damage");
 	}
 }
