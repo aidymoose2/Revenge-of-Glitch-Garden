@@ -5,12 +5,15 @@ using UnityEngine;
 public class Lizard : MonoBehaviour {
 
 	private Attacker attacker;
-	private bool beginAttacking;
+	Animator animator;
+
+	bool defenderCollision;
 
 	// Use this for initialization
 	void Start () 
 	{
 		attacker = GetComponent<Attacker>();
+		animator = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -23,7 +26,9 @@ public class Lizard : MonoBehaviour {
 	{
 		if (collisionObject.gameObject.GetComponent<Defender>())
 		{
-		//run some functions
+			defenderCollision = true;
+			animator.SetBool("IsAttacking", defenderCollision);
+			print ("isAttacking: " + defenderCollision);
 		print (this + " collided with " + collisionObject.gameObject);
 		}
 	}
