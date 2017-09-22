@@ -27,10 +27,10 @@ public class Fox : MonoBehaviour {
 		collisionObject = collider2D.gameObject;
 		print ("collision object = " + collisionObject);
 
-		if (collisionObject.GetComponent<Defender>());
+		if (collisionObject.GetComponent<Defender>())
 		{
 			defenderCollision = true;
-			print ("Defender collision: " + defenderCollision);
+			print ("Defender collision: " + defenderCollision + collisionObject);
 			CheckDefenderType(collisionObject);
 		}
 	}
@@ -41,7 +41,8 @@ public class Fox : MonoBehaviour {
 		{
 			isGravestone = true;
 		}
-		if (collisionObject.GetComponent<Projectile>())
+		//
+	if (collisionObject.GetComponent<Projectile>())
 		{
 			isProjectile = true;
 		}
@@ -64,17 +65,26 @@ public class Fox : MonoBehaviour {
 		else
 		{
 			Attack();
-			print ("running attack");
+			print (this + " attacking " + collisionObject);
 		}
 	}
 	void Attack()
 	{
-		animator.SetBool("IsAttacking", defenderCollision);
+		animator.SetBool("isAttacking", defenderCollision);
 		print (this + "isAttacking: " + defenderCollision);
 	}
 
 	void Jump()
 	{
+		animator.SetBool ("isJumping", isGravestone);
 		print ("Jump");
+	}
+	public void ResetDefenderBool()
+	{
+		defenderCollision = false;
+		isGravestone = false;
+		isProjectile = false;
+		animator.SetBool ("isJumping", false);
+		animator.SetBool ("isTriggered", false); 
 	}
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gravestone : MonoBehaviour {
+public class Gravestone : Defender {
 
 	// Use this for initialization
 	void Start () {
