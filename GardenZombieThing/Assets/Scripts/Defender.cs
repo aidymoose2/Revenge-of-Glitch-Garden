@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Defender : MonoBehaviour {
 
+	public float hitPoints;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -13,9 +15,12 @@ public class Defender : MonoBehaviour {
 	void Update () {
 		
 	}
+		
 
-	void OnTriggerEnter2D()
-	{
-		print ("Collided with" + name); 
-	}
+
+
+
+
+
+
 }
