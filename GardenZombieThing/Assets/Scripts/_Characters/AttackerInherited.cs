@@ -5,10 +5,16 @@ using UnityEngine;
 public class AttackerInherited : MonoBehaviour {
 
 	[Range (0f,1.5f)] public float currentSpeed; 
-	protected float damageDealt;
+	public float damage;
 
 	private GameObject collisionObject;
 	private bool defenderCollision;
+	private Health health;
+
+	void Start ()
+	{
+		//animator = GetComponent<Animator>();
+	}
 
 
 	void Update () {
@@ -21,21 +27,29 @@ public class AttackerInherited : MonoBehaviour {
 	{
 		collisionObject = collider2D.gameObject;
 		CheckIfDefender (collisionObject);
+
+	}
+
+	void OnTriggerExit2D(Collider2D collider2D)
+	{
+		ResetAttackerBool ();
 	}
 
 	//Check if object collider with has defender component
 	public bool CheckIfDefender(GameObject collisionObject)
 	{
-		if (collisionObject.GetComponent<Defender> ()) 
-		{
-			print ("Defender collision: " + collisionObject);
-			CheckDefenderType (collisionObject);
-			return true;
-		} 
-		else 
+		if (!collisionObject.GetComponent<Defender> ()) 
 		{
 			return false;
 		}
+
+		else
+		{
+			print ("Defender collision: " + collisionObject);
+			CheckDefenderType (collisionObject);
+			health = collisionObject.GetComponent<Health> ();
+			return true;
+		} 
 	}
 
 	//Check which type of defender has been encountered
@@ -75,18 +89,22 @@ public class AttackerInherited : MonoBehaviour {
 	}
 
 
-	public void StrikeCurrentTarget(float damage)
-	{
-		print(this + " caused " + damage + " damage");
-	}
-	protected virtual void ResetAttackerBool()
-	{
-		
-	}
+
 
 	protected virtual void Attack(GameObject collisionObject)
 	{
 
 	}
 
+	protected virtual void StrikeCurrentTarget()
+	{
+		Health health = collisionObject.GetComponent<Health> ();
+		health.DamageTaken (damage);
+	}
+		
+
+	protected virtual void ResetAttackerBool()
+	{
+
+	}
 }

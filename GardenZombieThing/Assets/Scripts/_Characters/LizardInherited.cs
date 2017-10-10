@@ -6,19 +6,19 @@ public class LizardInherited : AttackerInherited {
 
 	private AttackerInherited attackerInherited;
 	Animator animator;
-	public float lizardDamageCount;
+	GameObject collisionObject;
+
 
 	// Use this for initialization
 	void Start () 
 	{
 		attackerInherited = GetComponent<AttackerInherited>();
 		animator = GetComponent<Animator>();
-		damageDealt = lizardDamageCount;
 	}
 
 	void OnTriggerEnter2D(Collider2D collider2D)
 	{
-		GameObject collisionObject = collider2D.gameObject;
+		collisionObject = collider2D.gameObject;
 		
 		if ((attackerInherited.CheckIfDefender(collisionObject)) && (!attackerInherited.CheckIfProjectile (collisionObject))) 
 		{
@@ -31,5 +31,13 @@ public class LizardInherited : AttackerInherited {
 		base.Attack (collisionObject);
 		animator.SetBool("IsAttacking", true);
 		print ("isAttacking");
+
+	}
+
+	protected override void ResetAttackerBool()
+	{
+		base.ResetAttackerBool ();
+		animator.SetBool ("IsAttacking", false); 
+		animator.SetBool ("IsWalking", true);
 	}
 }

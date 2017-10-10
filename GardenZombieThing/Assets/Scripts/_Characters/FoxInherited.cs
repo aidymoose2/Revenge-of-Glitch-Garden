@@ -7,14 +7,13 @@ public class FoxInherited : AttackerInherited{
 	Animator animator;
 	AttackerInherited attackerInherited;
 	private GameObject collisionObject;
-	public float foxDamageCount;
+
 
 	// Use this for initialization
 	void Start () 
 	{
 		animator = GetComponent<Animator>();
 		attackerInherited = GetComponent<AttackerInherited> ();
-		damageDealt = foxDamageCount;
 	}
 
 	void OnTriggerEnter2D(Collider2D collider2D)
@@ -44,16 +43,14 @@ public class FoxInherited : AttackerInherited{
 	protected override void Attack(GameObject collisionObject)
 	{
 		base.Attack (collisionObject);
-		bool isAttacking = true;
 		attackerInherited.SetSpeed(0f);
-		animator.SetBool("isAttacking", isAttacking);
-		print (this + "isAttacking: " + isAttacking);
+		animator.SetBool("isAttacking", true);
+		print (this + "isAttacking");
 	}
 
 	void Jump()
 	{
-		bool isJumping = true;
-		animator.SetBool ("isJumping", isJumping);
+		animator.SetBool ("isJumping", true);
 		print ("Jump");
 	}
 	protected override void ResetAttackerBool()
