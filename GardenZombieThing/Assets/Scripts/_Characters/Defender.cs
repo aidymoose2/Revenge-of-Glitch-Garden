@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Defender : MonoBehaviour {
 
-	public float hitPoints;
-
 	// Use this for initialization
 	void Start () {
 		
